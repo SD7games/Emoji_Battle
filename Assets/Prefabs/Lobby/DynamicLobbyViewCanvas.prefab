@@ -2201,7 +2201,7 @@ GameObject:
   - component: {fileID: 9057304954836499464}
   - component: {fileID: 6720350770260328478}
   m_Layer: 5
-  m_Name: ColorButtons
+  m_Name: ColorSwitcherButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3495,7 +3495,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5064736699205543793, guid: caec0f8d5a44a324ba05ff3e431b2c6b, type: 3}
       propertyPath: m_Name
-      value: ModePopup
+      value: SettingsPopup
       objectReference: {fileID: 0}
     - target: {fileID: 5064736699205543793, guid: caec0f8d5a44a324ba05ff3e431b2c6b, type: 3}
       propertyPath: m_IsActive

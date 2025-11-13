@@ -224,6 +224,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ad81b3c7659be498ce1215dda573c6, type: 3}
+--- !u!114 &238449939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6720350770260328478, guid: 63348ebf7cce73543a05da8edaab0fa0, type: 3}
+  m_PrefabInstance: {fileID: 6136292687096197089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462740c588604e44cb7285ad0052050f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorSwitcher
 --- !u!1 &279516444
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +663,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ec0593e23f1294c9f0f1c801b1c2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2056865269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4262719120192289379, guid: 81da38bfc79c42e4882182c010fb434c, type: 3}
+  m_PrefabInstance: {fileID: 2067199299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73d17fbb1fe93b49aa3af06a203d1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EmojiDataSetter
 --- !u!1001 &2067199299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -704,6 +726,14 @@ PrefabInstance:
       propertyPath: _playerSign
       value: 
       objectReference: {fileID: 5932995981778098031}
+    - target: {fileID: 6863368328980441272, guid: 81da38bfc79c42e4882182c010fb434c, type: 3}
+      propertyPath: _emojiSetter
+      value: 
+      objectReference: {fileID: 2056865269}
+    - target: {fileID: 6863368328980441272, guid: 81da38bfc79c42e4882182c010fb434c, type: 3}
+      propertyPath: _colorSwitcher
+      value: 
+      objectReference: {fileID: 238449939}
     - target: {fileID: 6863368328980441272, guid: 81da38bfc79c42e4882182c010fb434c, type: 3}
       propertyPath: _contentScroll
       value: 

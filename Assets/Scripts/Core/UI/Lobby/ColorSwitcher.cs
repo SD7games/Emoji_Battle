@@ -20,8 +20,5 @@ public class ColorSwitcher : MonoBehaviour
                     _playerLobby.SetEmojiData(_emojiDataByColor[index]);
             });
         }
-
-        if (_emojiDataByColor.Count > 0)
-            _playerLobby.SetEmojiData(_emojiDataByColor[0]);
     }
 }
