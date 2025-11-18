@@ -76,13 +76,13 @@ Inspired by classic tic-tac-toe, but expanded with emoji customization, AI oppon
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4b3916c1-822c-4724-bc4f-90469bbe0df3" width="260" />
-  <img src="https://github.com/user-attachments/assets/6b700aa7-0317-4c1d-90a9-dc624bfc6bd8" width="260" />  
+  <img src="SplеshScene.png" width="260" />
+  <img src="BootstrapScene.png" width="260" />  
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3493ee22-de05-47d3-b13f-1c08b4642b29" width="260" />  
-  <img src="https://github.com/user-attachments/assets/4d8ac580-c872-4093-9b78-f831097f2fe3" width="260" />
+  <img src="LobbyScene.png" width="260" />  
+  <img src="MainScene.png" width="260" />
 </p>
 
 <p align="center">
