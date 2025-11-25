@@ -38,7 +38,8 @@ Inspired by classic tic-tac-toe, but expanded with emoji customization, AI oppon
 - `IAIStrategy` interface for modular AI behaviour  
 - Event-based UI and communication  
 - Coroutines for delays and animations  
-- Player progress stored in JSON / PlayerPrefs  
+- Player progress stored in JSON / PlayerPrefs
+- Shader Graph (basic UI/VFX effects)
 - Optional editor tools for emoji testing
 
 ---
