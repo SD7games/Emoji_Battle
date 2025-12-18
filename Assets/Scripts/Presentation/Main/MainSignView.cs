@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainSignView : MonoBehaviour
+public sealed class MainSignView : MonoBehaviour
 {
     [Header("PLAYER UI")]
     [SerializeField] private Image _playerEmojiImage;
@@ -19,6 +19,11 @@ public class MainSignView : MonoBehaviour
     public void SetPlayer(Sprite emoji, string name)
     {
         _playerEmojiImage.sprite = emoji;
+        _playerNameText.text = name;
+    }
+
+    public void SetPlayerName(string name)
+    {
         _playerNameText.text = name;
     }
 

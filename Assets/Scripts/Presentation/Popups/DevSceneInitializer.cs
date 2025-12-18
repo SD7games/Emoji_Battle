@@ -6,6 +6,7 @@ public sealed class DevSceneInitializer : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(_popupServicePrefab);
+        if (PopupService.I == null)
+            Instantiate(_popupServicePrefab);
     }
 }

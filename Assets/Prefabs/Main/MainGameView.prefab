@@ -3110,6 +3110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainUIView
   _restartButton: {fileID: 2077101452571519114}
   _backButton: {fileID: 1448902817324408029}
+  _settingsButton: {fileID: 9045093568078562207}
   _boardView: {fileID: 3778065128468187642}
 --- !u!114 &3778065128468187642
 MonoBehaviour:

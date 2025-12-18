@@ -13,7 +13,9 @@ public class EntryPointBootstrap : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(_popupServicePrefab);
+        if (PopupService.I == null)
+            Instantiate(_popupServicePrefab);
+
         _controller = new BootstrapController(_bootstrapView);
     }
 

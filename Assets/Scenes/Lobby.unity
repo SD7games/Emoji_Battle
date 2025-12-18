@@ -277,10 +277,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 775078897582716034, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3469034816757853219, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -369,20 +365,12 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 805856047}
-    - target: {fileID: 6594604904499116370, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6594604904499116370, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6594604904499116370, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1319367405}
+      addedObject: {fileID: 1441006128}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
 --- !u!114 &384741253 stripped
@@ -623,11 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1319367405 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-  m_PrefabInstance: {fileID: 1590098706}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1394222310 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2605611941780462916, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
@@ -639,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0d9fed2bc754041bb932f9b0c7d4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopupCanvasController
---- !u!1001 &1590098706
+--- !u!1001 &1441006127
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -647,9 +630,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2004706455}
     m_Modifications:
+    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.476
+      objectReference: {fileID: 0}
     - target: {fileID: 5809461802969278626, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_Name
       value: SettingsPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5809461802969278626, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_Pivot.x
@@ -701,15 +712,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -731,11 +742,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6414701930081143143, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 6414701930081143143, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475733231018414940, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475733231018414940, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+--- !u!224 &1441006128 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+  m_PrefabInstance: {fileID: 1441006127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1441006129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 879253989797440037, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
+  m_PrefabInstance: {fileID: 1441006127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98deb8b819cf40a4bbcadd858fe17c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsPopup
 --- !u!114 &1873355919 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5199187361504966813, guid: 63348ebf7cce73543a05da8edaab0fa0, type: 3}
@@ -758,17 +801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fccf318000dc649a068db214b13636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyView
---- !u!114 &2000582951 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 879253989797440037, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-  m_PrefabInstance: {fileID: 1590098706}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98deb8b819cf40a4bbcadd858fe17c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsPopup
 --- !u!224 &2004706455 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6594604904499116370, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
@@ -959,7 +991,11 @@ PrefabInstance:
     - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
       propertyPath: '_scenePopups.Array.data[0]'
       value: 
-      objectReference: {fileID: 2000582951}
+      objectReference: {fileID: 1441006129}
+    - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
+      propertyPath: '_scenePopups.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1441006129}
     - target: {fileID: 4197158358226225970, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
       propertyPath: m_Name
       value: LobbyInstaller
