@@ -6,10 +6,14 @@ public class EntryPointBootstrap : MonoBehaviour
     [SerializeField]
     private BootstrapView _bootstrapView;
 
+    [SerializeField]
+    private PopupService _popupServicePrefab;
+
     private BootstrapController _controller;
 
     private void Awake()
     {
+        Instantiate(_popupServicePrefab);
         _controller = new BootstrapController(_bootstrapView);
     }
 

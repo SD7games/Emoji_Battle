@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02d1f001dfc9e843b1c48d373a58072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bootstrapView: {fileID: 0}
+  _bootstrapView: {fileID: 2205288587352796138, guid: 849a0617cf93e4edc8fec0f9626ebd7d, type: 3}
+  _popupServicePrefab: {fileID: 4238455430526825372, guid: 6b262bf4aad934045a78b24e6ffef95c, type: 3}

@@ -167,6 +167,7 @@ MonoBehaviour:
   _aiDissolve: {fileID: 8870414464769296334}
   _aiNameText: {fileID: 0}
   _startButton: {fileID: 1707732851466890557}
+  _settingsButton: {fileID: 1978764855818142961}
 --- !u!114 &2416285859226741587
 MonoBehaviour:
   m_ObjectHideFlags: 0

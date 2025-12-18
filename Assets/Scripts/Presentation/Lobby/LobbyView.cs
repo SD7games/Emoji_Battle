@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,10 @@ public sealed class LobbyView : MonoBehaviour
     [SerializeField] private ColorSwitcherView _colorSwitcher;
     [SerializeField] private DissolveLobby _playerDissolve;
     [SerializeField] private DissolveLobby _aiDissolve;
+    [SerializeField] private TMP_Text _playerNameText;
     [SerializeField] private TMP_Text _aiNameText;
     [SerializeField] private Button _startButton;
+    [SerializeField] private Button _settingsButton;
 
     private LobbyController _controller;
 
@@ -23,18 +26,13 @@ public sealed class LobbyView : MonoBehaviour
         _emojiView.OnEmojiClicked += _controller.OnEmojiSelected;
         _colorSwitcher.OnColorSelected += _controller.OnColorChanged;
         _startButton.onClick.AddListener(OnStartButton);
+        _settingsButton.onClick.AddListener(OnSettingsButton);
 
         _controller.PlayerAvatarChanged += UpdatePlayerAvatar;
         _controller.AIAvatarChanged += UpdateAIAvatar;
         _controller.EmojiListChanged += UpdateEmojiList;
+        _controller.PlayerNameChanged += UpdatePlayerName;
         _controller.AINameChanged += UpdateAIName;
-    }
-
-    public void ForceSetPlayerAvatar(Sprite sprite)
-    {
-        _lastPlayerSprite = sprite;
-        _playerDissolve.SetSprite(sprite);
-        _playerDissolve.PlayForOwner(AvatarOwner.Player);
     }
 
     private void OnDestroy()
@@ -44,11 +42,30 @@ public sealed class LobbyView : MonoBehaviour
         _emojiView.OnEmojiClicked -= _controller.OnEmojiSelected;
         _colorSwitcher.OnColorSelected -= _controller.OnColorChanged;
         _startButton.onClick.RemoveListener(OnStartButton);
+        _settingsButton.onClick.RemoveListener(OnSettingsButton);
 
         _controller.PlayerAvatarChanged -= UpdatePlayerAvatar;
         _controller.AIAvatarChanged -= UpdateAIAvatar;
         _controller.EmojiListChanged -= UpdateEmojiList;
+        _controller.PlayerNameChanged -= UpdatePlayerName;
         _controller.AINameChanged -= UpdateAIName;
+    }
+
+    public void ForceSetPlayerAvatar(Sprite sprite)
+    {
+        _lastPlayerSprite = sprite;
+        _playerDissolve.SetSprite(sprite);
+        _playerDissolve.PlayForOwner(AvatarOwner.Player);
+    }
+
+    private void OnSettingsButton()
+    {
+        PopupService.I.Show(PopupId.Settings);
+    }
+
+    private void UpdatePlayerName(string name)
+    {
+        _playerNameText.text = name;
     }
 
     private void UpdateAIName(string value)

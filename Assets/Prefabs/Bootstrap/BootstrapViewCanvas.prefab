@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6975689925631548316}
   - component: {fileID: 7170225340324458258}
   - component: {fileID: 2205288587352796138}
+  - component: {fileID: 1867229848300763573}
   m_Layer: 5
   m_Name: BootstrapViewCanvas
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slider: {fileID: 5299446038989595987}
   _progressText: {fileID: 5130537124050333733}
+--- !u!114 &1867229848300763573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863343585910732143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023a07907194052418bbbc9daa255b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneFader
+  _sceneFaderImage: {fileID: 5501902674713683989}
 --- !u!1 &2211684376373922617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,6 +5882,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 421976947440071741, guid: a7e0c76e66832ed4190bdaf70e3d1a5e, type: 3}
   m_PrefabInstance: {fileID: 2021622309466038252}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5501902674713683989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5788411479924340729, guid: a7e0c76e66832ed4190bdaf70e3d1a5e, type: 3}
+  m_PrefabInstance: {fileID: 2021622309466038252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7632699667292347891
 PrefabInstance:
   m_ObjectHideFlags: 0
