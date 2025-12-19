@@ -51,6 +51,12 @@ MonoBehaviour:
   _turnState: {fileID: 316598601210307784}
   _aiController: {fileID: 6340134050003887928}
   _winLines: {fileID: 0}
+  _popupCanvas: {fileID: 0}
+  _scenePopups:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _emojiSets:
   - {fileID: 11400000, guid: 6b6c84d126464c040bbed916feba2efe, type: 2}
   - {fileID: 11400000, guid: 3651e23b5c62b054081d0b4ab62ddf78, type: 2}

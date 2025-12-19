@@ -583,6 +583,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892ef40f541db424e864b0ed38274396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefeatPopup
+  _showDuration: 0.25
+  _hideDuration: 0.2
+  _showEase: 27
+  _hideEase: 26
 --- !u!114 &1917082037685617002
 MonoBehaviour:
   m_ObjectHideFlags: 0

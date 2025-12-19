@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb349d69bb3ceb46b8d84facb92fa98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyInstaller
-  _view: {fileID: 2943326692570323335, guid: 63348ebf7cce73543a05da8edaab0fa0, type: 3}
-  _aiComplexity: {fileID: 5199187361504966813, guid: 63348ebf7cce73543a05da8edaab0fa0, type: 3}
+  _view: {fileID: 0}
+  _aiComplexityView: {fileID: 0}
   _emojiSets:
   - {fileID: 11400000, guid: 6b6c84d126464c040bbed916feba2efe, type: 2}
   - {fileID: 11400000, guid: 3651e23b5c62b054081d0b4ab62ddf78, type: 2}
@@ -56,3 +56,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d461605546b33e34a86648e35035e66c, type: 2}
   - {fileID: 11400000, guid: 3e51d83b789c126498e5febe8c445ab4, type: 2}
   - {fileID: 11400000, guid: e940a4f66e5c46f40bd623b63019a1ec, type: 2}
+  _popupCanvas: {fileID: 0}
+  _scenePopups:
+  - {fileID: 0}

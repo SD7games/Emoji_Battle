@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1053903576227645791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95,6 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937726ae5c911d84e9feda97b5c764d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryPopup
+  _showDuration: 0.25
+  _hideDuration: 0.2
+  _showEase: 27
+  _hideEase: 26
 --- !u!114 &1648576762189444133
 MonoBehaviour:
   m_ObjectHideFlags: 0

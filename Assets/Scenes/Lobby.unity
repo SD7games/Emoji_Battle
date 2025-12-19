@@ -220,6 +220,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ad81b3c7659be498ce1215dda573c6, type: 3}
+--- !u!114 &132156760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8364477591686168212, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
+  m_PrefabInstance: {fileID: 310297565}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d9fed2bc754041bb932f9b0c7d4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupCanvasController
 --- !u!1 &279516444
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,17 +622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1394222310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2605611941780462916, guid: a9cbfe9e886e2484c9f8b1f34f574d02, type: 3}
-  m_PrefabInstance: {fileID: 310297565}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0d9fed2bc754041bb932f9b0c7d4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopupCanvasController
 --- !u!1001 &1441006127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -630,37 +630,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2004706455}
     m_Modifications:
-    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2710102486701877591, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5577167284278193464, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.476
-      objectReference: {fileID: 0}
     - target: {fileID: 5809461802969278626, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_Name
       value: SettingsPopup
-      objectReference: {fileID: 0}
-    - target: {fileID: 5809461802969278626, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_Pivot.x
@@ -741,22 +713,6 @@ PrefabInstance:
     - target: {fileID: 6106036781743056636, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414701930081143143, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414701930081143143, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7475733231018414940, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 7475733231018414940, guid: 243529d1f6e6edf4db6300a517ef9c11, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -975,25 +931,13 @@ PrefabInstance:
     - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
       propertyPath: _popupCanvas
       value: 
-      objectReference: {fileID: 1394222310}
-    - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
-      propertyPath: _aiComplexity
-      value: 
-      objectReference: {fileID: 1873355919}
+      objectReference: {fileID: 132156760}
     - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
       propertyPath: _aiComplexityView
       value: 
       objectReference: {fileID: 1873355919}
     - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
-      propertyPath: _scenePopups.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
       propertyPath: '_scenePopups.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1441006129}
-    - target: {fileID: 1553764194869651094, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}
-      propertyPath: '_scenePopups.Array.data[1]'
       value: 
       objectReference: {fileID: 1441006129}
     - target: {fileID: 4197158358226225970, guid: 80f364ed2ad89e243b3c5ba95374a0b6, type: 3}

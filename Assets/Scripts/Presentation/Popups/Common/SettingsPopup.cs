@@ -33,11 +33,17 @@ public sealed class SettingsPopup : PopupBase
     private SettingsService _settings;
     private bool _bound;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _settings = SettingsService.I;
+        base.Awake();
 
-        _closeButton.onClick.AddListener(() => PopupService.I.HideCurrent());
+        _settings = SettingsService.I;
+        _closeButton.onClick.AddListener(OnCloseClicked);
+    }
+
+    private void OnDestroy()
+    {
+        _closeButton.onClick.RemoveListener(OnCloseClicked);
     }
 
     public override void Show()
@@ -51,6 +57,11 @@ public sealed class SettingsPopup : PopupBase
     {
         Unbind();
         base.Hide();
+    }
+
+    private void OnCloseClicked()
+    {
+        PopupService.I.HideCurrent();
     }
 
     private void Bind()
