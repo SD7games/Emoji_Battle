@@ -1061,10 +1061,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CompletePopup
       objectReference: {fileID: 0}
-    - target: {fileID: 2354045176569108075, guid: 21b8354114613564c8de70e2fca84cfd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4461899700238295016, guid: 21b8354114613564c8de70e2fca84cfd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1504,10 +1500,6 @@ PrefabInstance:
     - target: {fileID: 6808280089196757596, guid: e4462175366860d46922d77a42883c53, type: 3}
       propertyPath: m_Name
       value: LootBoxPopup
-      objectReference: {fileID: 0}
-    - target: {fileID: 6808280089196757596, guid: e4462175366860d46922d77a42883c53, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

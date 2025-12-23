@@ -448,6 +448,7 @@ MonoBehaviour:
   _hideDuration: 0.2
   _showEase: 27
   _hideEase: 26
+  _messageText: {fileID: 7045792416927424487}
 --- !u!114 &6610059146333490148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopupCloseButton
   _button: {fileID: 5322700517326412213}
+  _delay: 1
 --- !u!1 &5610943807197659786
 GameObject:
   m_ObjectHideFlags: 0

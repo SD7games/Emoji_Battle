@@ -7,6 +7,8 @@ public sealed class DefeatPopup : ResultPopup
 
     [SerializeField] private TMP_Text _messageText;
 
+    private int _lastIndex = -1;
+
     private static readonly string[] DefeatTexts =
     {
         "Nice try!",
@@ -16,8 +18,8 @@ public sealed class DefeatPopup : ResultPopup
         "Don't give up!",
         "Not this time.",
         "Try again.",
-        "The opponent was tough.",
-        "Ooops… not this time."
+        "The opponent\n\n was tough.",
+        "Ooops… \n\nnot this time."
     };
 
     public override void Show()
@@ -28,7 +30,18 @@ public sealed class DefeatPopup : ResultPopup
 
     private void SetRandomText()
     {
-        int index = Random.Range(0, DefeatTexts.Length);
+        if (DefeatTexts.Length == 0)
+            return;
+
+        int index;
+
+        do
+        {
+            index = Random.Range(0, DefeatTexts.Length);
+        }
+        while (index == _lastIndex && DefeatTexts.Length > 1);
+
+        _lastIndex = index;
         _messageText.text = DefeatTexts[index];
     }
 }
