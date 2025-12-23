@@ -2,42 +2,42 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BootstrapController
+public sealed class BootstrapController
 {
     private const string LOBBY_SCENE = "Lobby";
+    private const float MIN_SHOW_TIME = 2f;
 
-    private readonly BootstrapView _bootstrapView;
+    private readonly BootstrapView _view;
 
-    private AsyncOperation _loadOperation;
-
-    public BootstrapController(BootstrapView bootstrapView)
+    public BootstrapController(BootstrapView view)
     {
-        _bootstrapView = bootstrapView;
-        _bootstrapView.SetProgress(0);
+        _view = view;
+        _view.SetProgress(0);
     }
 
-    public async Task StartAsynk()
+    public async Task StartAsync()
     {
-        _loadOperation = SceneManager.LoadSceneAsync(LOBBY_SCENE);
-        _loadOperation.allowSceneActivation = false;
+        float startTime = Time.realtimeSinceStartup;
 
-        await Task.Delay(1000);
-        _bootstrapView.SetProgress(11);
+        var operation = SceneManager.LoadSceneAsync(LOBBY_SCENE);
+        operation.allowSceneActivation = false;
 
-        await Task.Delay(1000);
-        _bootstrapView.SetProgress(28);
+        while (!operation.isDone)
+        {
+            float progress01 = Mathf.Clamp01(operation.progress / 0.9f);
+            _view.SetProgress(Mathf.RoundToInt(progress01 * 100));
 
-        await Task.Delay(1000);
-        _bootstrapView.SetProgress(63);
+            bool sceneReady = operation.progress >= 0.9f;
+            bool minTimePassed =
+                Time.realtimeSinceStartup - startTime >= MIN_SHOW_TIME;
 
-        await Task.Delay(1000);
-        _bootstrapView.SetProgress(85);
+            if (sceneReady && minTimePassed)
+            {
+                _view.SetProgress(100);
+                operation.allowSceneActivation = true;
+            }
 
-        await Task.Delay(1000);
-        _bootstrapView.SetProgress(100);
-
-        await Task.Delay(300);
-
-        _loadOperation.allowSceneActivation = true;
+            await Task.Yield();
+        }
     }
 }

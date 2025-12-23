@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EntryPointBootstrap : MonoBehaviour
@@ -19,15 +20,20 @@ public class EntryPointBootstrap : MonoBehaviour
         _controller = new BootstrapController(_bootstrapView);
     }
 
-    private async void Start()
+    private void Start()
+    {
+        _ = RunAsync();
+    }
+
+    private async Task RunAsync()
     {
         try
         {
-            await _controller.StartAsynk();
+            await _controller.StartAsync();
         }
         catch (Exception e)
         {
-            Debug.LogError(e);
+            Debug.LogException(e);
         }
     }
 }

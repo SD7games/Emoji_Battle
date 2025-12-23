@@ -19,23 +19,21 @@ public sealed class BootstrapView : MonoBehaviour
 
     public void SetProgress(int progress)
     {
-        if (_slider == null || _progressText == null)
-        {
-            Debug.LogError("BootstrapView: UI references are missing");
+        progress = Mathf.Clamp(progress, 0, 100);
+
+        if (Mathf.Abs(progress - _currentProgress) < 0.1f)
             return;
-        }
 
         _progressTween?.Kill();
-        _progressTween = null;
-
-        progress = Mathf.Clamp(progress, 0, 100);
 
         float duration = Mathf.Max(
             0.05f,
-            Mathf.Abs(progress - _currentProgress) * 0.02f
+            Mathf.Abs(progress - _currentProgress) * 0.015f
         );
 
-        _progressTween = DOTween.To(() => _currentProgress, x =>
+        _progressTween = DOTween.To(
+            () => _currentProgress,
+            x =>
             {
                 _currentProgress = x;
                 _slider.value = x / 100f;
@@ -43,7 +41,6 @@ public sealed class BootstrapView : MonoBehaviour
             },
             progress,
             duration
-        )
-        .SetEase(Ease.Linear);
+        ).SetEase(Ease.Linear);
     }
 }
