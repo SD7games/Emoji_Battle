@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InputController
@@ -11,7 +13,7 @@ public class InputController
 
     public InputController(IReadOnlyList<Button> buttons)
     {
-        this._buttons = buttons ?? throw new ArgumentNullException(nameof(buttons));
+        _buttons = buttons ?? throw new ArgumentNullException(nameof(buttons));
 
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -24,16 +26,29 @@ public class InputController
     private void OnButtonClick(int index)
     {
         if (_isBlocked)
-        {
             return;
-        }
 
         var button = _buttons[index];
         if (button == null || !button.interactable)
-        {
             return;
-        }
 
         OnCellClicked?.Invoke(index);
+    }
+
+    public void Block()
+    {
+        _isBlocked = true;
+    }
+
+    public void Unblock()
+    {
+        _isBlocked = false;
+    }
+
+    public IEnumerator BlockForSeconds(float seconds)
+    {
+        _isBlocked = true;
+        yield return new WaitForSeconds(seconds);
+        _isBlocked = false;
     }
 }

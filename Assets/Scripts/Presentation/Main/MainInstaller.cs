@@ -156,7 +156,7 @@ public sealed class MainInstaller : MonoBehaviour
         };
 
         _rewardService = new GameRewardService(_emojiSets);
-        _resultController = new GameResultController(_winLines, _rewardService, this);
+        _resultController = new GameResultController(_winLines, _rewardService, this, _input);
 
         _flow.OnGameOver += OnGameOver;
 

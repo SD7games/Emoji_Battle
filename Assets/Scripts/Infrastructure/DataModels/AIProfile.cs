@@ -8,7 +8,7 @@ public enum AIStrategyType
 [System.Serializable]
 public class AIProfile
 {
-    public string Name = "AI";
+    public string Name = "Bambik";
     public AIStrategyType Strategy = AIStrategyType.Easy;
     public int EmojiColor;
     public int EmojiIndex;

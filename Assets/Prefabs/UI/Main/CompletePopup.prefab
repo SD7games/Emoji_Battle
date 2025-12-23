@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopupCloseButton
   _button: {fileID: 7625002974571764096}
+  _delay: 1
 --- !u!114 &5771381557959394780
 MonoBehaviour:
   m_ObjectHideFlags: 0

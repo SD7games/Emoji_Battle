@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public sealed class PopupCloseButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
+    [SerializeField] private float _delay = 1f;
 
     private void Awake()
     {
@@ -13,13 +15,28 @@ public sealed class PopupCloseButton : MonoBehaviour
         _button.onClick.AddListener(Close);
     }
 
+    private void OnEnable()
+    {
+        _button.interactable = false;
+        StartCoroutine(EnableAfterDelay());
+    }
+
     private void OnDestroy()
     {
         _button.onClick.RemoveListener(Close);
     }
 
+    private IEnumerator EnableAfterDelay()
+    {
+        yield return new WaitForSeconds(_delay);
+        _button.interactable = true;
+    }
+
     private void Close()
     {
+        if (!_button.interactable)
+            return;
+
         PopupService.I.HideCurrent();
     }
 }

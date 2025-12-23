@@ -6,18 +6,27 @@ public sealed class GameResultController
     private readonly WinLineView _lines;
     private readonly GameRewardService _rewards;
     private readonly MonoBehaviour _coroutineRunner;
+    private readonly InputController _input;
 
     private const float DRAW_DELAY = 0.8f;
+    private const float POPUP_BLOCK_TIME = 0.3f;
 
-    public GameResultController(WinLineView lines, GameRewardService rewards, MonoBehaviour coroutineRunner)
+    public GameResultController(
+        WinLineView lines,
+        GameRewardService rewards,
+        MonoBehaviour coroutineRunner,
+        InputController input)
     {
         _lines = lines;
         _rewards = rewards;
         _coroutineRunner = coroutineRunner;
+        _input = input;
     }
 
     public void HandleGameOver(CellState winner, WinLineView.WinLineType? line)
     {
+        _input.Block();
+
         GameRewardResult reward = _rewards.OnWin(winner);
 
         if (line.HasValue)
@@ -41,6 +50,8 @@ public sealed class GameResultController
 
     private void ShowResultPopup(CellState winner, GameRewardResult reward)
     {
+        _coroutineRunner.StartCoroutine(_input.BlockForSeconds(POPUP_BLOCK_TIME));
+
         if (winner == CellState.Player)
         {
             if (reward.AllEmojisUnlocked)
