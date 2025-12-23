@@ -65,10 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Not your win this time.
-
-
-    Try again.'
+  m_text: "That was close! \n\nTry again."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -587,6 +584,7 @@ MonoBehaviour:
   _hideDuration: 0.2
   _showEase: 27
   _hideEase: 26
+  _messageText: {fileID: 4346949112792087610}
 --- !u!114 &1917082037685617002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopupCloseButton
   _button: {fileID: 2906293325677913342}
+  _delay: 1
 --- !u!1 &8647412308699857088
 GameObject:
   m_ObjectHideFlags: 0
