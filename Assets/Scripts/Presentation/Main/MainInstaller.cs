@@ -90,7 +90,6 @@ public sealed class MainInstaller : MonoBehaviour
 
         if (_uiView != null)
         {
-            _uiView.OnRestartClicked -= _session.Restart;
             _uiView.OnBackClicked -= OnBackToLobby;
             _uiView.OnSettingsClicked -= OnOpenSettings;
         }
@@ -165,7 +164,6 @@ public sealed class MainInstaller : MonoBehaviour
 
     private void BindUI()
     {
-        _uiView.OnRestartClicked += _session.Restart;
         _uiView.OnBackClicked += OnBackToLobby;
         _uiView.OnSettingsClicked += OnOpenSettings;
     }
