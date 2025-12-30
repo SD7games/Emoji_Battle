@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e06bd667c138974b9be20898aa237f0, type: 3}
   m_Name: EmojiChoose
   m_EditorClassIdentifier: Assembly-CSharp::SoundDefinition
-  Channel: 0
   Clips:
-  - {fileID: 8300000, guid: 45a68837190ea194ba53dca3eda596f4, type: 3}
+  - {fileID: 8300000, guid: a994b7d4269e5a94ab3975ba6281810f, type: 3}
   Volume: 0.8
   PitchRange: {x: 1, y: 1}
