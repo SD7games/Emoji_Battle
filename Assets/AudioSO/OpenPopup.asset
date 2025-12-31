@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundDefinition
   Clips:
   - {fileID: 8300000, guid: d948fd9eb2017f34aace9d085efd3ac6, type: 3}
-  Volume: 0.8
+  Volume: 0.6
   PitchRange: {x: 1, y: 1}
