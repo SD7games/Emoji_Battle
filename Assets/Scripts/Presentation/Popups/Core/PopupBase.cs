@@ -78,7 +78,7 @@ public abstract class PopupBase : MonoBehaviour
         if (_showSound == null)
             return;
 
-        AudioService.I.Play(_showSound);
+        AudioService.I.PlaySFX(_showSound);
     }
 
     public virtual void Hide()
@@ -110,6 +110,6 @@ public abstract class PopupBase : MonoBehaviour
         if (_hideSound == null)
             return;
 
-        AudioService.I.Play(_hideSound);
+        AudioService.I.PlaySFX(_hideSound);
     }
 }

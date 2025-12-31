@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DevSceneInitializer
   _popupServicePrefab: {fileID: 4238455430526825372, guid: 6b262bf4aad934045a78b24e6ffef95c, type: 3}
   _audioServicePrefab: {fileID: 5800229258008177918, guid: 1d67fdf4083cd7d49a4e33a2e1bb4a34, type: 3}
-  _devMusic: {fileID: 0}
+  _devMusic: {fileID: 11400000, guid: 277e23531812fc64fa0a52ad44512637, type: 2}
 --- !u!4 &255760715
 Transform:
   m_ObjectHideFlags: 0

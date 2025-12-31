@@ -6,7 +6,9 @@ public sealed class AudioService : MonoBehaviour
 {
     public static AudioService I { get; private set; }
 
+    [Header("Sources")]
     [SerializeField] private AudioSource _musicSource;
+
     [SerializeField] private AudioSource _sfxSource;
 
     private MusicDefinition _currentMusic;
@@ -15,7 +17,7 @@ public sealed class AudioService : MonoBehaviour
     private int _playlistIndex;
 
     private Coroutine _musicRoutine;
-    private float _baseMusicVolume = 1f;
+    private float _musicDefinitionVolume = 1f;
 
     private void Awake()
     {
@@ -29,24 +31,16 @@ public sealed class AudioService : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _musicSource.loop = false;
-        SettingsService.MusicChanged += RefreshMusicVolume;
+        _musicSource.playOnAwake = false;
+        _sfxSource.playOnAwake = false;
+
+        SettingsService.MusicChanged += OnMusicSettingsChanged;
     }
 
     private void OnDestroy()
     {
         if (I == this)
-            SettingsService.MusicChanged -= RefreshMusicVolume;
-    }
-
-    public void PlayMusicIfDifferent(MusicDefinition music)
-    {
-        if (music == null || music.Tracks == null || music.Tracks.Length == 0)
-            return;
-
-        if (_currentMusic == music && _musicSource.isPlaying)
-            return;
-
-        PlayMusic(music);
+            SettingsService.MusicChanged -= OnMusicSettingsChanged;
     }
 
     public void PlayMusic(MusicDefinition music)
@@ -54,34 +48,13 @@ public sealed class AudioService : MonoBehaviour
         if (music == null || music.Tracks == null || music.Tracks.Length == 0)
             return;
 
-        StopMusicInternal();
-
-        _currentMusic = music;
-        _baseMusicVolume = music.Volume;
-
-        BuildPlaylist();
-        _musicRoutine = StartCoroutine(PlaylistRoutine());
-    }
-
-    public void StopMusic()
-    {
-        StopMusicInternal();
-        _currentMusic = null;
-    }
-
-    public void RefreshMusicVolume()
-    {
-        if (_musicSource.clip == null)
+        if (_currentMusic == music)
             return;
 
-        var data = SettingsService.I.Data;
-
-        _musicSource.volume = data.MusicEnabled
-            ? _baseMusicVolume * data.MusicVolume
-            : 0f;
+        StartMusic(music);
     }
 
-    public void Play(SoundDefinition sound)
+    public void PlaySFX(SoundDefinition sound)
     {
         if (sound == null)
             return;
@@ -102,6 +75,28 @@ public sealed class AudioService : MonoBehaviour
             clip,
             sound.Volume * data.SfxVolume
         );
+    }
+
+    public void RefreshMusicVolume()
+    {
+        ApplyMusicVolume();
+    }
+
+    public void StopMusic()
+    {
+        StopMusicInternal();
+        _currentMusic = null;
+    }
+
+    private void StartMusic(MusicDefinition music)
+    {
+        StopMusicInternal();
+
+        _currentMusic = music;
+        _musicDefinitionVolume = music.Volume;
+
+        BuildPlaylist();
+        _musicRoutine = StartCoroutine(PlaylistRoutine());
     }
 
     private void StopMusicInternal()
@@ -125,7 +120,7 @@ public sealed class AudioService : MonoBehaviour
         _playlist.AddRange(_currentMusic.Tracks);
 
         // Fisher–Yates shuffle
-        for (int i = 0; i < _playlist.Count; i++)
+        for (int i = 0; i < _playlist.Count - 1; i++)
         {
             int j = Random.Range(i, _playlist.Count);
             (_playlist[i], _playlist[j]) = (_playlist[j], _playlist[i]);
@@ -148,10 +143,35 @@ public sealed class AudioService : MonoBehaviour
             _musicSource.clip = clip;
             _musicSource.pitch = 1f;
 
-            RefreshMusicVolume();
-            _musicSource.Play();
+            ApplyMusicVolume();
 
-            yield return new WaitWhile(() => _musicSource.isPlaying);
+            if (SettingsService.I.Data.MusicEnabled)
+                _musicSource.Play();
+
+            yield return new WaitWhile(() => _musicSource.isPlaying ||
+                                             !SettingsService.I.Data.MusicEnabled);
         }
+    }
+
+    private void OnMusicSettingsChanged()
+    {
+        ApplyMusicVolume();
+    }
+
+    private void ApplyMusicVolume()
+    {
+        if (_musicSource.clip == null)
+            return;
+
+        var data = SettingsService.I.Data;
+
+        _musicSource.volume = data.MusicEnabled
+            ? _musicDefinitionVolume * data.MusicVolume
+            : 0f;
+
+        if (!data.MusicEnabled && _musicSource.isPlaying)
+            _musicSource.Stop();
+        else if (data.MusicEnabled && !_musicSource.isPlaying)
+            _musicSource.Play();
     }
 }

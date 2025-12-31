@@ -104,13 +104,13 @@ public sealed class LobbyController : IDisposable
     private void PlayEmojiSelectSound()
     {
         if (_emojiSelectSound != null)
-            AudioService.I.Play(_emojiSelectSound);
+            AudioService.I.PlaySFX(_emojiSelectSound);
     }
 
     private void PlayColorChangeSound()
     {
         if (_swapSound != null)
-            AudioService.I.Play(_swapSound);
+            AudioService.I.PlaySFX(_swapSound);
     }
 
     private void UpdateEmojiList()

@@ -71,7 +71,7 @@ public sealed class AIComplexityView : MonoBehaviour
         if (_openListSound == null)
             return;
 
-        AudioService.I.Play(_openListSound);
+        AudioService.I.PlaySFX(_openListSound);
     }
 
     public void PlayCloseListSound()
@@ -79,7 +79,7 @@ public sealed class AIComplexityView : MonoBehaviour
         if (_closeListSound == null)
             return;
 
-        AudioService.I.Play(_closeListSound);
+        AudioService.I.PlaySFX(_closeListSound);
     }
 
     public void SetMain(AIStrategyType type)

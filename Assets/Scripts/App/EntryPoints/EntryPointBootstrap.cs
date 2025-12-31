@@ -55,6 +55,6 @@ public sealed class EntryPointBootstrap : MonoBehaviour
         if (_backgroundMusic == null)
             return;
 
-        AudioService.I.PlayMusicIfDifferent(_backgroundMusic);
+        AudioService.I.PlayMusic(_backgroundMusic);
     }
 }

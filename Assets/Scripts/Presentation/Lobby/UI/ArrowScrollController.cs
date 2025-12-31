@@ -84,7 +84,7 @@ public class ArrowScrollController : MonoBehaviour
         if (_scrollSound == null)
             return;
 
-        AudioService.I.Play(_scrollSound);
+        AudioService.I.PlaySFX(_scrollSound);
     }
 
     private void OnScrollChanged(Vector2 _)
