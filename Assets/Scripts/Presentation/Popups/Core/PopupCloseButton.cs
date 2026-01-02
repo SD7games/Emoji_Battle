@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public sealed class PopupCloseButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
-    [SerializeField] private float _delay = 1f;
+    [SerializeField] private float _delay = 0.8f;
 
     private void Awake()
     {
