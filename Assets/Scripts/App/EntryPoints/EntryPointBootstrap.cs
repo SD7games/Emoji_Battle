@@ -12,6 +12,7 @@ public sealed class EntryPointBootstrap : MonoBehaviour
 
     [SerializeField] private PopupService _popupServicePrefab;
     [SerializeField] private AudioService _audioServicePrefab;
+    [SerializeField] private AdsService _adsServicePrefab;
 
     [Header("Background Music")]
     [SerializeField] private MusicDefinition _backgroundMusic;
@@ -52,6 +53,9 @@ public sealed class EntryPointBootstrap : MonoBehaviour
 
         if (AudioService.I == null)
             Instantiate(_audioServicePrefab);
+
+        if (AdsService.I == null)
+            Instantiate(_adsServicePrefab);
     }
 
     private void StartBackgroundMusic()

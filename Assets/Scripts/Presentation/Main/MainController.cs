@@ -185,6 +185,7 @@ public sealed class MainController : IDisposable
 
     private void OnResultPopupClosed()
     {
+        AdsService.I?.NotifyMatchFinished();
         _session.Restart();
     }
 
