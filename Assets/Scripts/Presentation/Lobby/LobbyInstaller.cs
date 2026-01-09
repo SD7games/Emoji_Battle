@@ -81,7 +81,7 @@ public sealed class LobbyInstaller : MonoBehaviour
         var dataService = GameDataService.I;
         var data = dataService.Data;
 
-        if (data.Progress.HasAnyProgress())
+        if (data.IsFirstLaunchDone)
             return;
 
         const int firstN = 4;
@@ -96,6 +96,7 @@ public sealed class LobbyInstaller : MonoBehaviour
         }
 
         data.Progress.UnlockFirstNAllColors(total, firstN);
+        data.IsFirstLaunchDone = true;
         dataService.Save();
     }
 

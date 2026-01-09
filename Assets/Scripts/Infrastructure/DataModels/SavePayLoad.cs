@@ -6,4 +6,7 @@ public class SavePayload
     public GameProgress Progress = new();
 
     public SettingsData Settings = new();
+
+    public bool IsFirstLaunchDone;
+    public int SaveVersion;
 }

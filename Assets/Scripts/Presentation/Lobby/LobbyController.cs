@@ -46,7 +46,6 @@ public sealed class LobbyController : IDisposable
     public void Initialize()
     {
         var player = GameDataService.I.Data.Player;
-        // PlayerPrefs.DeleteAll();// Delete after relise!
 
         _selectedEmojiId = player.EmojiIndex;
         _selectedEmojiColorId = player.EmojiColor;

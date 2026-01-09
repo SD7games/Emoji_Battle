@@ -70,6 +70,7 @@ public sealed class MainController : IDisposable
 
         _ui.OnBackClicked += OnBackToLobby;
         _ui.OnSettingsClicked += OnOpenSettings;
+        _ui.OnAdsClicked += OnAdsPressed;
 
         _input.OnCellClicked += OnCellClicked;
 
@@ -81,6 +82,27 @@ public sealed class MainController : IDisposable
 
         BindResultPopups();
         SettingsService.PlayerNameChanged += OnPlayerNameChanged;
+    }
+
+    private void OnAdsPressed()
+    {
+        if (AdsService.I == null)
+            return;
+
+        if (!AdsService.I.CanShowRewarded())
+            return;
+
+        AdsService.I.ShowRewardedForRewarded(OnRewardedCompleted);
+    }
+
+    private void OnRewardedCompleted()
+    {
+        var result = _rewards.RewardedOpened();
+
+        if (result.EmojiUnlocked)
+            _popups.Show(PopupId.Reward);
+        else
+            _popups.Show(PopupId.Complete);
     }
 
     private void OnMoveApplied(int index, CellState state)
@@ -113,6 +135,7 @@ public sealed class MainController : IDisposable
 
         _ui.OnBackClicked -= OnBackToLobby;
         _ui.OnSettingsClicked -= OnOpenSettings;
+        _ui.OnAdsClicked -= OnAdsPressed;
     }
 
     private void InitHeaderSigns()

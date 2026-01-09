@@ -7,6 +7,8 @@ public sealed class MainUIView : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button _backButton;
 
+    [SerializeField] private Button _adsButton;
+
     [SerializeField] private Button _settingsButton;
 
     [Header("Board")]
@@ -16,6 +18,8 @@ public sealed class MainUIView : MonoBehaviour
 
     public event Action OnBackClicked;
 
+    public event Action OnAdsClicked;
+
     public event Action OnSettingsClicked;
 
     public event Action<int> OnCellClicked;
@@ -24,6 +28,7 @@ public sealed class MainUIView : MonoBehaviour
     {
         _backButton.onClick.AddListener(OnBackPressed);
         _settingsButton.onClick.AddListener(OnSettingsPressed);
+        _adsButton.onClick.AddListener(OnAdsPressed);
 
         _boardView.OnCellPressed += OnBoardCellPressed;
     }
@@ -32,6 +37,7 @@ public sealed class MainUIView : MonoBehaviour
     {
         _backButton.onClick.RemoveListener(OnBackPressed);
         _settingsButton.onClick.RemoveListener(OnSettingsPressed);
+        _adsButton.onClick.RemoveListener(OnAdsPressed);
 
         _boardView.OnCellPressed -= OnBoardCellPressed;
     }
@@ -39,6 +45,11 @@ public sealed class MainUIView : MonoBehaviour
     public void InitBoardSprites(Sprite player, Sprite ai)
     {
         _boardView.AssignSprites(player, ai);
+    }
+
+    private void OnAdsPressed()
+    {
+        OnAdsClicked?.Invoke();
     }
 
     private void OnBackPressed() => OnBackClicked?.Invoke();

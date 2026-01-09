@@ -698,6 +698,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4055067458765112678, guid: e4462175366860d46922d77a42883c53, type: 3}
   m_PrefabInstance: {fileID: 1573887173}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1573887176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2668358804338352665, guid: e4462175366860d46922d77a42883c53, type: 3}
+  m_PrefabInstance: {fileID: 1573887173}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e460bfc59ab0664c92486a870b2d0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootBoxPopup
 --- !u!114 &1937782718 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1994585269952937927, guid: 5151394c9c934a745901ea04fa791d2f, type: 3}
@@ -1319,7 +1330,7 @@ PrefabInstance:
     - target: {fileID: 745501417015648733, guid: e357b2b6ff605d4409a01e3cfdf5bd45, type: 3}
       propertyPath: '_scenePopups.Array.data[4]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1573887176}
     - target: {fileID: 745501417015648733, guid: e357b2b6ff605d4409a01e3cfdf5bd45, type: 3}
       propertyPath: '_scenePopups.Array.data[5]'
       value: 
