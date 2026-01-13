@@ -12,7 +12,6 @@ public sealed class MainController : IDisposable
     private readonly AIMoveController _ai;
     private readonly InputController _input;
     private readonly GameResultController _results;
-    private readonly GameRewardService _rewards;
     private readonly EmojiResolver _resolver;
     private readonly PopupService _popups;
     private readonly AudioService _audio;
@@ -53,7 +52,6 @@ public sealed class MainController : IDisposable
         _ai = ai;
         _input = input;
         _results = results;
-        _rewards = rewards;
         _resolver = resolver;
         _popups = popups;
         _audio = audio;
@@ -70,7 +68,6 @@ public sealed class MainController : IDisposable
 
         _ui.OnBackClicked += OnBackToLobby;
         _ui.OnSettingsClicked += OnOpenSettings;
-        _ui.OnAdsClicked += OnAdsPressed;
 
         _input.OnCellClicked += OnCellClicked;
 
@@ -82,27 +79,6 @@ public sealed class MainController : IDisposable
 
         BindResultPopups();
         SettingsService.PlayerNameChanged += OnPlayerNameChanged;
-    }
-
-    private void OnAdsPressed()
-    {
-        if (AdsService.I == null)
-            return;
-
-        if (!AdsService.I.CanShowRewarded())
-            return;
-
-        AdsService.I.ShowRewardedForRewarded(OnRewardedCompleted);
-    }
-
-    private void OnRewardedCompleted()
-    {
-        var result = _rewards.RewardedOpened();
-
-        if (result.EmojiUnlocked)
-            _popups.Show(PopupId.Reward);
-        else
-            _popups.Show(PopupId.Complete);
     }
 
     private void OnMoveApplied(int index, CellState state)
@@ -135,7 +111,6 @@ public sealed class MainController : IDisposable
 
         _ui.OnBackClicked -= OnBackToLobby;
         _ui.OnSettingsClicked -= OnOpenSettings;
-        _ui.OnAdsClicked -= OnAdsPressed;
     }
 
     private void InitHeaderSigns()

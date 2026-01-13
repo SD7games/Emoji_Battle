@@ -10,6 +10,8 @@ public sealed class LobbyController : IDisposable
     private readonly SoundDefinition _swapSound;
     private readonly GameRewardService _rewards;
 
+    private bool _rewardedInProgress;
+
     private int _uiColorId = -1;
 
     private int _selectedEmojiId = -1;
@@ -60,11 +62,17 @@ public sealed class LobbyController : IDisposable
 
     public void OnAdsPressed()
     {
-        if (AdsService.I == null) return;
+        if (_rewardedInProgress)
+            return;
 
-        if (!AdsService.I.CanShowRewarded()) return;
+        if (AdsService.I == null)
+            return;
 
-        AdsService.I.ShowRewardedForRewarded(OnRewarded);
+        if (!AdsService.I.CanShowRewarded())
+            return;
+
+        _rewardedInProgress = true;
+        AdsService.I.ShowRewarded(OnRewarded);
     }
 
     public void SetInitialColor(int colorId)
@@ -115,14 +123,15 @@ public sealed class LobbyController : IDisposable
 
     private void OnRewarded()
     {
-        var result = _rewards.RewardedOpened();
+        _rewardedInProgress = false;
 
+        var result = _rewards.RewardedOpened();
         UpdateEmojiList();
 
-        if (result.EmojiUnlocked)
-            PopupService.I.Show(PopupId.Reward);
-        else
-            PopupService.I.Show(PopupId.Complete);
+        PopupService.I.Show
+        (
+            result.EmojiUnlocked ? PopupId.Reward : PopupId.Complete
+        );
     }
 
     private void PlayEmojiSelectSound()

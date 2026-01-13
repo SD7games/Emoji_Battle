@@ -14,17 +14,20 @@ public sealed class AdsService :
     [SerializeField] private string _androidGameId = "6020853";
 
     [SerializeField] private string _rewardedPlacementId = "Rewarded_Android";
-    [SerializeField] private bool _testMode = true;
+    [SerializeField] private string _interstitialPlacementId = "Interstitial_Android";
+    [SerializeField] private bool _testMode = false;
 
     [Header("Auto Ads")]
-    [SerializeField] private int _matchesPerAdMin = 2;
+    [SerializeField] private int _matchesPerAdMin = 4;
 
-    [SerializeField] private int _matchesPerAdMax = 3;
+    [SerializeField] private int _matchesPerAdMax = 5;
 
     private int _matchesSinceLastAd;
     private int _currentMatchesThreshold;
 
     private bool _rewardedReady;
+    private bool _interstitialReady;
+
     private Action _rewardCallback;
 
     private void Awake()
@@ -39,7 +42,6 @@ public sealed class AdsService :
         DontDestroyOnLoad(gameObject);
 
         ResetMatchCounter();
-
         Advertisement.Initialize(_androidGameId, _testMode, this);
     }
 
@@ -50,38 +52,113 @@ public sealed class AdsService :
         if (_matchesSinceLastAd < _currentMatchesThreshold)
             return;
 
-        TryShowAutoAd();
+        TryShowInterstitial();
     }
 
     public bool CanShowRewarded()
-    {
-        return IsRewardedReady();
-    }
+        => IsOnlineAndReady(_rewardedReady);
 
-    public void ShowRewardedForRewarded(Action onReward)
+    public void ShowRewarded(Action onReward)
     {
-        if (!IsRewardedReady())
+        if (onReward == null)
+            return;
+
+        if (!CanShowRewarded())
             return;
 
         _rewardCallback = onReward;
         Advertisement.Show(_rewardedPlacementId, this);
     }
 
-    private void TryShowAutoAd()
+    private void TryShowInterstitial()
     {
-        if (!IsRewardedReady())
-        {
-            ResetMatchCounter();
+        if (!IsOnlineAndReady(_interstitialReady))
             return;
-        }
 
-        _rewardCallback = null;
         ResetMatchCounter();
-
-        Advertisement.Show(_rewardedPlacementId, this);
+        Advertisement.Show(_interstitialPlacementId, this);
     }
 
-    private bool IsRewardedReady()
+    public void OnInitializationComplete()
+    {
+        LoadRewarded();
+        LoadInterstitial();
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        _rewardedReady = false;
+        _interstitialReady = false;
+    }
+
+    private void LoadRewarded()
+    {
+        _rewardedReady = false;
+        Advertisement.Load(_rewardedPlacementId, this);
+    }
+
+    private void LoadInterstitial()
+    {
+        _interstitialReady = false;
+        Advertisement.Load(_interstitialPlacementId, this);
+    }
+
+    public void OnUnityAdsAdLoaded(string placementId)
+    {
+        if (placementId == _rewardedPlacementId)
+            _rewardedReady = true;
+
+        if (placementId == _interstitialPlacementId)
+            _interstitialReady = true;
+    }
+
+    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+    {
+        if (placementId == _rewardedPlacementId)
+            _rewardedReady = false;
+
+        if (placementId == _interstitialPlacementId)
+            _interstitialReady = false;
+    }
+
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState state)
+    {
+        if (placementId == _rewardedPlacementId)
+        {
+            if (state == UnityAdsShowCompletionState.COMPLETED)
+                _rewardCallback?.Invoke();
+
+            _rewardCallback = null;
+            LoadRewarded();
+        }
+
+        if (placementId == _interstitialPlacementId)
+        {
+            LoadInterstitial();
+        }
+    }
+
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+    {
+        if (placementId == _rewardedPlacementId)
+        {
+            _rewardCallback = null;
+            LoadRewarded();
+        }
+
+        if (placementId == _interstitialPlacementId)
+        {
+            LoadInterstitial();
+        }
+    }
+
+    public void OnUnityAdsShowStart(string placementId)
+    { }
+
+    public void OnUnityAdsShowClick(string placementId)
+    { }
+
+    private bool IsOnlineAndReady(bool ready)
     {
         if (!InternetService.IsOnline)
             return false;
@@ -92,66 +169,16 @@ public sealed class AdsService :
         if (Advertisement.isShowing)
             return false;
 
-        return _rewardedReady;
+        return ready;
     }
 
     private void ResetMatchCounter()
     {
         _matchesSinceLastAd = 0;
-        _currentMatchesThreshold = UnityEngine.Random.Range(
-            _matchesPerAdMin,
-            _matchesPerAdMax + 1
-        );
+
+        int min = Mathf.Min(_matchesPerAdMin, _matchesPerAdMax);
+        int max = Mathf.Max(_matchesPerAdMin, _matchesPerAdMax);
+
+        _currentMatchesThreshold = UnityEngine.Random.Range(min, max + 1);
     }
-
-    public void OnInitializationComplete()
-    {
-        LoadRewarded();
-    }
-
-    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-    {
-        _rewardedReady = false;
-    }
-
-    private void LoadRewarded()
-    {
-        _rewardedReady = false;
-        Advertisement.Load(_rewardedPlacementId, this);
-    }
-
-    public void OnUnityAdsAdLoaded(string placementId)
-    {
-        if (placementId == _rewardedPlacementId)
-            _rewardedReady = true;
-    }
-
-    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
-    {
-        _rewardedReady = false;
-    }
-
-    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState state)
-    {
-        if (placementId != _rewardedPlacementId)
-            return;
-
-        if (state == UnityAdsShowCompletionState.COMPLETED)
-            _rewardCallback?.Invoke();
-
-        _rewardCallback = null;
-        LoadRewarded();
-    }
-
-    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
-    {
-        _rewardCallback = null;
-        LoadRewarded();
-    }
-
-    public void OnUnityAdsShowStart(string placementId)
-    { }
-
-    public void OnUnityAdsShowClick(string placementId)
-    { }
 }
