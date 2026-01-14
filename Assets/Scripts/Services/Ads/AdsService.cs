@@ -27,8 +27,13 @@ public sealed class AdsService :
 
     private bool _rewardedReady;
     private bool _interstitialReady;
+    private bool _initializing;
 
     private Action _rewardCallback;
+
+    public event Action RewardedFailed;
+
+    public event Action RewardedReady;
 
     private void Awake()
     {
@@ -42,7 +47,38 @@ public sealed class AdsService :
         DontDestroyOnLoad(gameObject);
 
         ResetMatchCounter();
-        Advertisement.Initialize(_androidGameId, _testMode, this);
+
+        if (InternetService.IsOnline)
+            InitializeAds();
+    }
+
+    private void OnEnable()
+    {
+        InternetService.OnlineStateChanged += OnInternetChanged;
+    }
+
+    private void OnDisable()
+    {
+        InternetService.OnlineStateChanged -= OnInternetChanged;
+    }
+
+    public bool HasInternet()
+        => InternetService.IsOnline;
+
+    public bool CanShowRewarded()
+        => IsOnlineAndReady(_rewardedReady);
+
+    public bool ShowRewarded(Action onReward)
+    {
+        if (onReward == null)
+            return false;
+
+        if (!CanShowRewarded())
+            return false;
+
+        _rewardCallback = onReward;
+        Advertisement.Show(_rewardedPlacementId, this);
+        return true;
     }
 
     public void NotifyMatchFinished()
@@ -55,50 +91,61 @@ public sealed class AdsService :
         TryShowInterstitial();
     }
 
-    public bool CanShowRewarded()
-        => IsOnlineAndReady(_rewardedReady);
-
-    public void ShowRewarded(Action onReward)
+    private void OnInternetChanged(bool isOnline)
     {
-        if (onReward == null)
+        if (!isOnline)
             return;
 
-        if (!CanShowRewarded())
+        if (!_initializing && !Advertisement.isInitialized)
+        {
+            InitializeAds();
             return;
+        }
 
-        _rewardCallback = onReward;
-        Advertisement.Show(_rewardedPlacementId, this);
+        if (Advertisement.isInitialized)
+        {
+            if (!_rewardedReady)
+                LoadRewarded();
+
+            if (!_interstitialReady)
+                LoadInterstitial();
+        }
     }
 
-    private void TryShowInterstitial()
+    private void InitializeAds()
     {
-        if (!IsOnlineAndReady(_interstitialReady))
-            return;
-
-        ResetMatchCounter();
-        Advertisement.Show(_interstitialPlacementId, this);
+        _initializing = true;
+        Advertisement.Initialize(_androidGameId, _testMode, this);
     }
 
     public void OnInitializationComplete()
     {
+        _initializing = false;
         LoadRewarded();
         LoadInterstitial();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
+        _initializing = false;
         _rewardedReady = false;
         _interstitialReady = false;
     }
 
     private void LoadRewarded()
     {
+        if (!InternetService.IsOnline)
+            return;
+
         _rewardedReady = false;
         Advertisement.Load(_rewardedPlacementId, this);
     }
 
     private void LoadInterstitial()
     {
+        if (!InternetService.IsOnline)
+            return;
+
         _interstitialReady = false;
         Advertisement.Load(_interstitialPlacementId, this);
     }
@@ -106,7 +153,10 @@ public sealed class AdsService :
     public void OnUnityAdsAdLoaded(string placementId)
     {
         if (placementId == _rewardedPlacementId)
+        {
             _rewardedReady = true;
+            RewardedReady?.Invoke();
+        }
 
         if (placementId == _interstitialPlacementId)
             _interstitialReady = true;
@@ -134,6 +184,7 @@ public sealed class AdsService :
 
         if (placementId == _interstitialPlacementId)
         {
+            ResetMatchCounter();
             LoadInterstitial();
         }
     }
@@ -143,6 +194,7 @@ public sealed class AdsService :
         if (placementId == _rewardedPlacementId)
         {
             _rewardCallback = null;
+            RewardedFailed?.Invoke();
             LoadRewarded();
         }
 
@@ -157,6 +209,14 @@ public sealed class AdsService :
 
     public void OnUnityAdsShowClick(string placementId)
     { }
+
+    private void TryShowInterstitial()
+    {
+        if (!IsOnlineAndReady(_interstitialReady))
+            return;
+
+        Advertisement.Show(_interstitialPlacementId, this);
+    }
 
     private bool IsOnlineAndReady(bool ready)
     {

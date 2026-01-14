@@ -11,6 +11,8 @@ public sealed class LobbyController : IDisposable
     private readonly GameRewardService _rewards;
 
     private bool _rewardedInProgress;
+    private bool _rewardedAvailable;
+    private bool _noInternetPopupShown;
 
     private int _uiColorId = -1;
 
@@ -28,6 +30,8 @@ public sealed class LobbyController : IDisposable
     public event Action<string> PlayerNameChanged;
 
     public event Action<string> AINameChanged;
+
+    public event Action<bool> RewardedAvailabilityChanged;
 
     public LobbyController(
         LobbyService service,
@@ -47,6 +51,12 @@ public sealed class LobbyController : IDisposable
 
     public void Initialize()
     {
+        if (AdsService.I != null)
+        {
+            AdsService.I.RewardedReady += OnRewardedReady;
+            AdsService.I.RewardedFailed += OnRewardedFailed;
+        }
+
         var player = GameDataService.I.Data.Player;
 
         _selectedEmojiId = player.EmojiIndex;
@@ -58,6 +68,12 @@ public sealed class LobbyController : IDisposable
     public void Dispose()
     {
         SettingsService.PlayerNameChanged -= OnPlayerNameChanged;
+
+        if (AdsService.I != null)
+        {
+            AdsService.I.RewardedReady -= OnRewardedReady;
+            AdsService.I.RewardedFailed -= OnRewardedFailed;
+        }
     }
 
     public void OnAdsPressed()
@@ -65,14 +81,35 @@ public sealed class LobbyController : IDisposable
         if (_rewardedInProgress)
             return;
 
+        if (!_rewardedAvailable)
+        {
+            if (!_noInternetPopupShown)
+            {
+                _noInternetPopupShown = true;
+                PopupService.I.Show(PopupId.NoInternet);
+            }
+
+            return;
+        }
+
         if (AdsService.I == null)
             return;
+
+        if (!AdsService.I.HasInternet())
+        {
+            PopupService.I.Show(PopupId.NoInternet);
+            return;
+        }
 
         if (!AdsService.I.CanShowRewarded())
             return;
 
         _rewardedInProgress = true;
-        AdsService.I.ShowRewarded(OnRewarded);
+
+        if (!AdsService.I.ShowRewarded(OnRewarded))
+        {
+            _rewardedInProgress = false;
+        }
     }
 
     public void SetInitialColor(int colorId)
@@ -119,6 +156,20 @@ public sealed class LobbyController : IDisposable
         var ai = _service.EnsureValidAIEmoji();
         if (ai != null)
             AIAvatarChanged?.Invoke(ai);
+    }
+
+    private void OnRewardedReady()
+    {
+        _rewardedAvailable = true;
+        RewardedAvailabilityChanged?.Invoke(true);
+    }
+
+    private void OnRewardedFailed()
+    {
+        _rewardedAvailable = false;
+        _rewardedInProgress = false;
+        RewardedAvailabilityChanged?.Invoke(false);
+        _noInternetPopupShown = false;
     }
 
     private void OnRewarded()

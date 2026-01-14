@@ -35,6 +35,12 @@ public sealed class LobbyView : MonoBehaviour
         _controller.EmojiListChanged += UpdateEmojiList;
         _controller.PlayerNameChanged += UpdatePlayerName;
         _controller.AINameChanged += UpdateAIName;
+        _controller.RewardedAvailabilityChanged += SetAdsButtonState;
+    }
+
+    private void SetAdsButtonState(bool available)
+    {
+        _adsButton.interactable = available;
     }
 
     private void OnDestroy()
@@ -52,6 +58,8 @@ public sealed class LobbyView : MonoBehaviour
         _controller.EmojiListChanged -= UpdateEmojiList;
         _controller.PlayerNameChanged -= UpdatePlayerName;
         _controller.AINameChanged -= UpdateAIName;
+        _controller.RewardedAvailabilityChanged -= SetAdsButtonState;
+
     }
 
     public void ForceSetPlayerAvatar(Sprite sprite)

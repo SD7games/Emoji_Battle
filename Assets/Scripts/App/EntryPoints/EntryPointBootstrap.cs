@@ -13,6 +13,7 @@ public sealed class EntryPointBootstrap : MonoBehaviour
     [SerializeField] private PopupService _popupServicePrefab;
     [SerializeField] private AudioService _audioServicePrefab;
     [SerializeField] private AdsService _adsServicePrefab;
+    [SerializeField] private InternetService _internetServicePrefab;
 
     [Header("Background Music")]
     [SerializeField] private MusicDefinition _backgroundMusic;
@@ -45,6 +46,9 @@ public sealed class EntryPointBootstrap : MonoBehaviour
 
     private void EnsureServices()
     {
+        if (InternetService.I == null)
+            Instantiate(_internetServicePrefab);
+
         if (VibrationService.I == null)
             Instantiate(_vibrationServicePrefab);
 

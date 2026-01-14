@@ -1,22 +1,48 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
-public static class InternetService
+public sealed class InternetService : MonoBehaviour
 {
-    public static bool IsOnline
+    public static InternetService I { get; private set; }
+
+    public static event Action<bool> OnlineStateChanged;
+
+    private bool _lastState;
+
+    public static bool IsOnline =>
+        Application.internetReachability != NetworkReachability.NotReachable;
+
+    private void Awake()
     {
-        get
+        if (I != null)
         {
-            return Application.internetReachability != NetworkReachability.NotReachable;
+            Destroy(gameObject);
+            return;
         }
+
+        I = this;
+        DontDestroyOnLoad(gameObject);
+
+        _lastState = IsOnline;
+        StartCoroutine(CheckRoutine());
     }
 
-    public static bool IsOnlineMobileOrWifi
+    private IEnumerator CheckRoutine()
     {
-        get
+        var wait = new WaitForSeconds(2f);
+
+        while (true)
         {
-            var r = Application.internetReachability;
-            return r == NetworkReachability.ReachableViaCarrierDataNetwork ||
-                   r == NetworkReachability.ReachableViaLocalAreaNetwork;
+            bool current = IsOnline;
+
+            if (current != _lastState)
+            {
+                _lastState = current;
+                OnlineStateChanged?.Invoke(current);
+            }
+
+            yield return wait;
         }
     }
 }
