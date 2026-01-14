@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ public sealed class LobbyView : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _adsButton;
+    [SerializeField] private Button _comlexityInfoButton;
 
     private LobbyController _controller;
 
@@ -29,6 +31,7 @@ public sealed class LobbyView : MonoBehaviour
         _startButton.onClick.AddListener(OnStartButton);
         _settingsButton.onClick.AddListener(OnSettingsButton);
         _adsButton.onClick.AddListener(OnAdsButton);
+        _comlexityInfoButton.onClick.AddListener(OnComplexityInfoButton);
 
         _controller.PlayerAvatarChanged += UpdatePlayerAvatar;
         _controller.AIAvatarChanged += UpdateAIAvatar;
@@ -36,11 +39,6 @@ public sealed class LobbyView : MonoBehaviour
         _controller.PlayerNameChanged += UpdatePlayerName;
         _controller.AINameChanged += UpdateAIName;
         _controller.RewardedAvailabilityChanged += SetAdsButtonState;
-    }
-
-    private void SetAdsButtonState(bool available)
-    {
-        _adsButton.interactable = available;
     }
 
     private void OnDestroy()
@@ -52,6 +50,7 @@ public sealed class LobbyView : MonoBehaviour
         _startButton.onClick.RemoveListener(OnStartButton);
         _settingsButton.onClick.RemoveListener(OnSettingsButton);
         _adsButton.onClick.RemoveListener(OnAdsButton);
+        _comlexityInfoButton.onClick.RemoveListener(OnComplexityInfoButton);
 
         _controller.PlayerAvatarChanged -= UpdatePlayerAvatar;
         _controller.AIAvatarChanged -= UpdateAIAvatar;
@@ -67,6 +66,16 @@ public sealed class LobbyView : MonoBehaviour
         _lastPlayerSprite = sprite;
         _playerDissolve.SetSprite(sprite);
         _playerDissolve.PlayForOwner(AvatarOwner.Player);
+    }
+
+    private void OnComplexityInfoButton()
+    {
+        PopupService.I.Show(PopupId.ComplexityInfo);
+    }
+
+    private void SetAdsButtonState(bool available)
+    {
+        _adsButton.interactable = available;
     }
 
     private void OnSettingsButton()
